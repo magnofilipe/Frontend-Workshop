@@ -16,8 +16,8 @@ Aqui você constrói a demo do workshop enquanto aprende os conceitos de cada et
 
 | Lição | Etapa do roteiro | Conceitos | Situação |
 |---|---|---|---|
-| 00 | Preparação | venv, pip, FastAPI, uvicorn, pytest | Em andamento |
-| 01 | 1 | Vite, npm, `index.html`, `main.tsx`, `App.tsx`, ordem de montagem, pastas | A fazer |
+| 00 | Preparação | venv, pip, FastAPI, uvicorn, pytest | Concluída |
+| 01 | 1 | Vite, npm, `index.html`, `main.tsx`, `App.tsx`, ordem de montagem, pastas | Em andamento |
 | 02 | 2 | div, box model, flexbox, Tailwind | A fazer |
 | 03 | 3 | Valores e referências, funções, import e export, desestruturação, tipos, props, `.map`, `key` | A fazer |
 | 04 | 4 | Promise, `async` e `await`, `fetch`, `useState`, `useEffect`, StrictMode, hook customizado, aba Network | A fazer |

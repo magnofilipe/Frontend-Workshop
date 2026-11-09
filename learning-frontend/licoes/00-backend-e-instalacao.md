@@ -1,7 +1,5 @@
 # Lição 00: subir o backend e entender o que foi instalado
 
-Ao final desta lição você terá a API de projetos rodando na porta 8000, vai saber o que cada pacote instalado faz e vai conseguir explicar ao time por que existe um servidor separado do frontend.
-
 ## Por que o frontend precisa de um backend
 
 O frontend roda no navegador da pessoa, e tudo que está lá pode ser lido e alterado por ela, por isso os dados oficiais (os projetos) moram em outro programa, num servidor que o navegador consulta pela rede usando HTTP. Na demo, esse programa é o `main.py`, e a conversa entre os dois sempre segue o mesmo formato: o frontend manda um pedido (método, rota e, às vezes, um corpo em JSON) e o backend devolve uma resposta (status e, às vezes, um corpo em JSON). É o mesmo desenho do dash, só que com três rotas em vez de dezenas.
@@ -22,7 +20,7 @@ O `main.py` sozinho não é um servidor. Ao ser executado, ele cria a variável 
 
 O uvicorn faz a parte da rede. Quando você roda `uvicorn main:app`, ele importa o seu `app` e avisa ao sistema operacional que as mensagens que chegarem na porta 8000 são dele, e a partir daí fica em ciclo: recebe os bytes de um pedido, transforma esse texto num pedido organizado (método, rota, cabeçalhos e corpo), entrega ao `app`, recebe a resposta que o FastAPI montou, converte de volta em bytes e envia ao navegador. Numa comparação com um restaurante, o FastAPI é a cozinha, que sabe as receitas, e o uvicorn é o atendente, que recebe os pedidos na porta e entrega os pratos. A regra que define como o atendente conversa com a cozinha se chama ASGI, e é por causa dela que o uvicorn poderia ser trocado por outro servidor sem mudar o `main.py`.
 
-O frontend tem o mesmo esquema: `npm run dev` liga o Vite, que é um servidor na porta 5173 cujo trabalho é entregar ao navegador os arquivos da página (HTML, JavaScript e CSS). Por isso a demo tem dois servidores ligados ao mesmo tempo, o Vite entregando o código da tela e o uvicorn entregando os dados. O navegador primeiro busca a página no 5173 e depois, enquanto essa página roda, o código dela pede os projetos ao 8000. Esse segundo pedido é a resposta à pergunta "em que momento o frontend se conecta ao backend".
+O frontend tem o mesmo esquema: `npm run dev` liga o Vite, que é um servidor na porta 5173 cujo trabalho é entregar ao navegador os arquivos da página (HTML, JavaScript e CSS). Por isso a demo tem dois servidores ligados ao mesmo tempo, o Vite entregando o código da tela e o uvicorn entregando os dados. O navegador primeiro busca a página no 5173 e depois, enquanto essa página roda, o código dela pede os projetos ao 8000. Esse segundo pedido é o momento em que o frontend se conecta ao backend.
 
 **pytest e httpx.** Esses dois só servem para os testes. O `pytest` encontra e roda as funções que começam com `test_`, e o `TestClient` do FastAPI usa o `httpx` para fazer pedidos HTTP à API sem precisar subir o servidor de verdade.
 
@@ -69,7 +67,7 @@ O `main:app` significa "no arquivo `main.py`, use a variável `app`". O `--reloa
 
 ## Lendo o main.py
 
-O arquivo tem quatro partes, e entender cada uma vai te ajudar a responder perguntas sobre integração no workshop.
+O arquivo tem quatro partes.
 
 ### Por que existem dois formatos, ProjectInput e Project
 
@@ -121,7 +119,7 @@ export type NewProject = {
 
 A tradução é direta: `str` vira `string`, `str | None` vira `string | null` e `list[Project]` vira `Project[]`. O `Project` do Python corresponde ao `Project` do TypeScript, e o `ProjectInput` corresponde ao `NewProject`.
 
-O tipo TypeScript tem uma limitação importante: ele é uma promessa que você faz, não uma verificação. O TypeScript é apagado antes do código chegar ao navegador, então, se um dia o backend renomear `title` para `name`, o frontend continua compilando sem erro e a tela fica vazia. Quem mantém os dois lados de acordo são as pessoas, e é para isso que a tabela de contrato do roteiro existe.
+O tipo TypeScript tem uma limitação importante: ele é uma promessa que você faz, não uma verificação. O TypeScript é apagado antes do código chegar ao navegador, então, se um dia o backend renomear `title` para `name`, o frontend continua compilando sem erro e a tela fica vazia. Quem mantém os dois lados de acordo são as pessoas, e é para isso que existe um contrato escrito da API, como a tabela no README do backend.
 
 Repare também que o tipo é `description: string | null` e não `description?: string`. O ponto de interrogação significaria que a chave pode nem vir no JSON, mas este backend sempre envia a chave, com `null` quando não há descrição. Essa diferença entre `null`, `undefined` e chave ausente é explicada na lição 03.
 
@@ -136,7 +134,7 @@ Repare também que o tipo é `description: string | null` e não `description?: 
 Responda com as suas palavras e me mande.
 
 1. Se o uvicorn estiver desligado, o que o navegador recebe ao pedir `/projects`? Existe algum status HTTP nessa situação?
-2. Por que a pasta `.venv` não vai para o git, e como outra pessoa do time consegue rodar o backend sem ela?
+2. Por que a pasta `.venv` não vai para o git, e como outra pessoa consegue rodar o backend sem ela?
 3. O botão "Criar" do frontend vai ficar desabilitado com o título vazio. Então por que o backend também valida o título?
 
 ## Respostas
