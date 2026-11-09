@@ -1,0 +1,22 @@
+Situação: implementei as tasks descritas em .specs/features/ai-report-*. Estou prestes a criar um novo componente que será usado na segunda página (relatorios/gerar-com-ia?origem=moduloX&step2). Por enquanto, vamos usá-lo na página atual (gerar-com-ia?origem=modulo1) enquanto Yan não traz as mudanças de feat/stepper-component. Este componente deve ser colocado no arquivo CheckboxList.tsx. Eis as suas especificações visuais e funcionais:
+
+- A div do componente (card de seleção) tem padding de todos os lados de 16px, corner radius de 10px, fill branco, stroke #D4D4D4 outside weight 1. Quando há hover nele, o background fica na cor #FFF8F5. Quando há a seleção de algum checkbox, o stroke fica na cor #FF856B.
+- Dentro da div do componente, há um checkbox (quadrado de seleção) com a mesma estilização do CheckboxDropdown.tsx. A diferença é que, quando o box é marcado, o background fica #FF856B (ao invés de #000000) e o ícone de check permanecendo na cor branca. 
+- 24px à direita do box, há um título, um subtítulo opcional (pode ou não aparecer) e uma data de modificação opcional (pode ou não aparecer). O título e Inter, Medium, 16px, line height 20, letter spacing 2% na cor preta. 16px abaixo do título está o subtítulo opcional com Inter, Medium, 14px, line height 20 e letter spacing 0% e fill #808080. 24px abaixo do subtítulo opcional, há a data de modificação opcional com Inter, Medium, 14px, line height 0, letter spacing 0 e cor #808080. A data de modificação deve seguir o formato "Atualizado em 17 de jul. 2026 às 13:53"! 
+- Podem haver vários cards de seleção. A distância entre eles deve ser de 16px. Ficam um abaixo do outro.
+- Este componente é genérico. Contudo, como estamos utilizando ele no contexto de relatório para esta página, o título deve ser o nome dos dashboards daquele módulo. Por exemplo, para Pearson, no Módulo 1, temos o dashboard "Observatório do Mercado de Trabalho", então ele deve aparecer em "http://localhost:8080/projeto/aguias-wizard-by-pearson/relatorios/gerar-com-ia?origem=modulo1" neste componente de CheckboxDropdown.tsx (em breve, será "http://localhost:8080/projeto/aguias-wizard-by-pearson/relatorios/gerar-com-ia?origem=modulo1&step2" porque esse componente aparecerá na 2º etapa da página). O subtítulo deve ser o que está no BD, bem como a data que está no atributo updated_at (eu acho). Este componente fará isso nessa página, mas fará outras ações em outras páginas, por isso deve ser genérico!
+- A largura do componente é automática, portanto, sua largura é definida pela div em que ele está inserido. 
+- Caso nenhum card seja selecionado no CheckboxDropdown.tsx e ele seja obrigatório no contexto proposto (isso acontecerá na step 2 em breve), aparecerá uma mensagem de erro 32px após o último card: essa mensagem de erro fica dentro de uma div com padding 16px para todos os lados, fill #FAEDED, stroke #DC2626 inside weight 1, corner radius 8px. Dentro da div haverá a mensagem de fato (que é genérica) com estilização Inter, Medium, 14px, line height 20, letter spacing 2% e cor #DC2626. No caso da página em que estamos trabalhando, a mensagem deve ser "Selecione pelo menos um dashboard para continuar."
+
+Tarefa: Acione a skill tlc-spec-driven e vamos implementar esta feature juntos.
+
+Restrições:
+1. Você DEVE explorar os repositórios do Backend e Frontend. Use sub-agents ao máximo. 
+2. Esteja ciente de que esse código vai para produção em breve, então tenha certeza de que sua implementação funcionará.
+3. Eu possuo uma prototipação no Figma que definiu os estilos dos componentes. Não crie estilizações próprias ou defina comportamentos sem meu consentimento.
+4. Você deve seguir as arquiteturas definidas em @"Arquitetura do frontend.md", @"Arquitetura do backend.md", @"Arquitetura de execução - backend atual.md" e @"Arquitetura de escopo - LLM.md".
+5. Se você tiver dúvidas ou algo não estiver claro o bastante, pergunte-me.
+6. Você DEVE reutilizar componentes que já existam no frontend.
+
+Observações: 
+- 
