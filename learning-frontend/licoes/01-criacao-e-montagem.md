@@ -74,23 +74,17 @@ npm run dev
 ```
 O `npm run` executa um script do `package.json`, e o script `dev` é `vite`. O terminal mostra o endereço `http://localhost:5173` e fica preso enquanto o servidor estiver no ar, como acontece com o uvicorn.
 
-## Parte 3: o que você vai escrever
+## Parte 3: o que mudou no projeto gerado
 
-O modelo criado pelo gerador traz uma página de exemplo com um contador e os logotipos do Vite e do React. Você vai trocar esse conteúdo pela estrutura da demo.
+O modelo do gerador trazia uma página de exemplo com contador e logotipos, que foi substituída pela estrutura da demo. `App.css`, `src/assets/` e `public/vite.svg` foram apagados.
 
-### Apagar o que não será usado
+### `tailwind.config.ts`
 
-- `src/App.css`
-- `src/assets/` (a pasta inteira)
-- `public/vite.svg`
+O campo `content` lista onde o Tailwind procura classes: `['./index.html', './src/**/*.{ts,tsx}']`. Se a lista estiver vazia ou não incluir um arquivo, as classes desse arquivo não são geradas, e o estilo simplesmente não aparece, sem mensagem de erro.
 
-### Ajustar `tailwind.config.ts`
+### `src/index.css`
 
-O campo `content` diz ao Tailwind em quais arquivos ele deve procurar classes. Preencha com o `index.html` e todos os `.ts` e `.tsx` dentro de `src`. Se esse campo ficar vazio, nenhuma classe é gerada e nada é estilizado, sem nenhuma mensagem de erro.
-
-### Trocar o conteúdo de `src/index.css`
-
-Apague tudo e deixe só as três diretivas do Tailwind:
+Ficaram só as três diretivas do Tailwind:
 
 ```css
 @tailwind base;
@@ -118,22 +112,20 @@ As outras pastas (`components`, `hooks`, `services`, `types` e `shared`) nascem 
 ### Os arquivos
 
 **`index.html`**
-- Troque `lang="en"` por `lang="pt-BR"`.
-- Troque o título para `Projetos`.
-- Apague a linha do ícone (`vite.svg`).
-- Aponte o `<script>` para o novo lugar do `main.tsx`.
+- Passou a usar `lang="pt-BR"` e o título `Projetos`.
+- Perdeu a linha do ícone.
+- O `<script>` agora aponta para `/src/app/main.tsx`.
 
 **`src/app/main.tsx`**
-- Ajuste os caminhos dos imports, porque o arquivo mudou de pasta.
-- Mantenha o `StrictMode`.
-- Use import nomeado para o `App`. A diferença entre os tipos de import está explicada logo abaixo.
+- Os imports ganharam `../`, porque o arquivo desceu uma pasta.
+- O `App` é importado com nome.
 
 **`src/app/App.tsx`**
-- Uma função `App` exportada com nome, que devolve `<ProjectsPage />`.
-- Hoje ela só repassa a página. Num projeto com várias telas, é aqui (ou em `router.tsx`, como diz a arquitetura do dash) que entram as rotas e os providers.
+- Só devolve `<ProjectsPage />`.
+- Num projeto com várias telas, é aqui (ou em `router.tsx`, como diz a arquitetura do dash) que entram as rotas e os providers.
 
 **`src/features/projects/pages/ProjectsPage.tsx`**
-- Uma função `ProjectsPage` exportada com nome, que devolve um `<main>` com um `<h1>` escrito "Projetos".
+- Devolve um `<main>` com o `<h1>` "Projetos".
 
 ### Duas formas de exportar
 
@@ -196,14 +188,12 @@ As dependências seguem uma direção só: `app` importa de `features`, `feature
 
 O dash está no meio de uma migração. A pasta `src` dele tem `features/` e `shared/`, que são a estrutura nova, e também `components/`, `pages/`, `hooks/`, `lib/`, `utils/` e `data/`, que são a estrutura antiga, organizada por tipo de arquivo. Quem abre o dash encontra as duas organizações convivendo, e isso torna difícil saber onde cada coisa deve ficar.
 
-## Parte 5: preveja antes de rodar
+## Parte 5: comportamentos que confundem quem lê o código
 
-Para cada item, escreva a sua previsão antes de testar e depois compare.
-
-1. Com a página aberta, aperte `Ctrl+U` para ver o código-fonte e depois olhe a aba Elements do F12. O que você espera encontrar dentro de `<div id="root">` em cada um dos dois?
-2. Escreva o `<h1>Projetos</h1>` ainda sem nenhuma classe. Ele vai aparecer grande e em negrito, como um título normal? Depois adicione `text-2xl font-semibold` e veja a diferença.
-3. Coloque `console.log('ProjectsPage chamada')` dentro da função `ProjectsPage`, antes do `return`. Onde essa mensagem aparece, no terminal onde roda o `npm run dev` ou no console do navegador? E quantas vezes ela aparece? Depois tire o `<StrictMode>` do `main.tsx`, recarregue, compare e volte o `StrictMode` para o lugar.
-4. No `index.html`, troque `id="root"` por `id="app"` sem mexer no `main.tsx`. O que acontece na tela e no console? Desfaça depois.
+1. **`Ctrl+U` mostra `<div id="root"></div>` vazio, e a aba Elements mostra a div cheia.** O `Ctrl+U` exibe o HTML que o servidor enviou, e o Elements exibe a página como ela está agora, depois que o React inseriu os elementos. Para depurar um frontend React, o lugar certo é sempre o Elements.
+2. **Um `<h1>` sem classes aparece como texto comum, sem tamanho nem negrito.** Isso é efeito do Preflight (`@tailwind base`). Em projetos com Tailwind, como o dash, nenhuma tag tem estilo próprio, e tudo que se vê vem de classes.
+3. **Um `console.log` dentro de um componente aparece no console do navegador, e não no terminal.** O componente roda no navegador, e o terminal do `npm run dev` só mostra mensagens do Vite. Em desenvolvimento, a mensagem aparece duas vezes por causa do `StrictMode`. Sem ele, e em produção, aparece uma vez.
+4. **Se o `id` do `index.html` não bater com o do `main.tsx`, a tela fica branca.** O console mostra `Target container is not a DOM element`, porque o `getElementById` devolveu `null` e o `!` só escondeu essa possibilidade do TypeScript.
 
 ## Parte 6: perguntas de checagem
 
@@ -211,11 +201,15 @@ Para cada item, escreva a sua previsão antes de testar e depois compare.
 2. Por que o `package-lock.json` vai para o git e a `node_modules` não?
 3. Ao ler `<ProjectCard title="X" />` e `<div className="p-4">`, como você sabe qual é componente e qual é tag HTML, e o que o React faz de diferente com cada um?
 
+## Respostas
+
+1. `localhost:5173` não abre, porque ninguém escuta essa porta. `localhost:8000/projects` abre normalmente e mostra o JSON. Vite e uvicorn são programas independentes em portas diferentes, e o navegador conversa com cada um separadamente: o Vite só entrega o código da tela, e a API não depende dele para nada. Em produção nem existe Vite rodando, porque o `npm run build` gera arquivos estáticos que outro servidor entrega (no dash, o nginx, por isso existe o `nginx.conf`).
+2. A `node_modules` fica fora do git porque pode ser recriada com `npm install`, porque é pesada (101 MB e mais de 5 mil arquivos só nesta demo) e, principalmente, porque contém programas compilados para o seu sistema. Nesta demo há `@swc/core-win32-x64-msvc`, `@esbuild/win32-x64` e `@rollup/rollup-win32-x64-msvc`, que são o SWC, o esbuild e o Rollup compilados para Windows, e que não rodam num Linux ou Mac. Num `npm install` feito em outro sistema, o npm baixa as versões compiladas para ele. O `package-lock.json` vai para o git porque é o registro das versões exatas: sem ele, cada pessoa pode receber versões diferentes dentro das faixas do `package.json`.
+3. O que decide é a primeira letra. Ao transformar o JSX, o SWC converte `<div>` no texto `"div"` e `<ProjectCard>` numa referência à variável `ProjectCard`. Com um texto, o React cria o elemento HTML de mesmo nome. Com uma variável, o React chama a função guardada nela e continua descendo pelo que ela devolve. Por isso todo componente precisa começar com maiúscula: `<projectCard />` vira o texto `"projectcard"`, o React tenta criar uma tag HTML que não existe e o componente nunca é chamado. Lendo o dash, há um teste rápido: componente sempre aparece num `import` no topo do arquivo (ou é declarado no próprio arquivo), e `div`, `span` e `button` nunca são importados.
+
 ## Quando terminar
 
-Me mande os seus arquivos para revisão, ou só me avise que já estão salvos e eu leio direto da pasta. Mande também as suas previsões com o que de fato aconteceu e as respostas às perguntas de checagem. A minha versão está em `solucoes/etapa-1/`, e o ideal é olhar só depois de tentar.
-
-Depois de revisado, faça o commit da etapa 1 em `workshop-demo`. Uma sugestão de mensagem:
+Faça o commit da etapa 1 em `workshop-demo`. Uma sugestão de mensagem:
 
 ```
 feat: scaffold Vite React frontend with Tailwind and feature folders so the workshop can show how the page mounts

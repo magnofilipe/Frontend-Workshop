@@ -1,13 +1,12 @@
 # Estudo para o workshop de frontend
 
-Aqui você constrói a demo do workshop enquanto aprende os conceitos de cada etapa. Você escreve o código, eu reviso, e a minha versão de cada etapa fica em `solucoes/` para você comparar depois de tentar.
+A demo do workshop é construída aqui, etapa por etapa. Configuração e ajustes mecânicos ficam comigo; o código de React é escrito por você e revisado por mim no próprio arquivo.
 
 ## Pastas
 
 | Pasta | Conteúdo |
 |---|---|
-| `licoes/` | Uma lição por etapa, com explicação, comandos, exercícios e perguntas de checagem |
-| `solucoes/` | Minha versão do frontend ao final de cada etapa |
+| `licoes/` | Uma lição por etapa, com explicação, comandos, perguntas de checagem e respostas |
 | `workshop-demo/` | O repositório apresentado no workshop, com um commit por etapa feito por você |
 | `workshop-demo/backend/` | API de projetos em FastAPI |
 | `workshop-demo/frontend/` | Demo em React, escrita por você |
