@@ -193,7 +193,8 @@ O dash está no meio de uma migração. A pasta `src` dele tem `features/` e `sh
 1. **`Ctrl+U` mostra `<div id="root"></div>` vazio, e a aba Elements mostra a div cheia.** O `Ctrl+U` exibe o HTML que o servidor enviou, e o Elements exibe a página como ela está agora, depois que o React inseriu os elementos. Para depurar um frontend React, o lugar certo é sempre o Elements.
 2. **Um `<h1>` sem classes aparece como texto comum, sem tamanho nem negrito.** Isso é efeito do Preflight (`@tailwind base`). Em projetos com Tailwind, como o dash, nenhuma tag tem estilo próprio, e tudo que se vê vem de classes.
 3. **Um `console.log` dentro de um componente aparece no console do navegador, e não no terminal.** O componente roda no navegador, e o terminal do `npm run dev` só mostra mensagens do Vite. Em desenvolvimento, a mensagem aparece duas vezes por causa do `StrictMode`. Sem ele, e em produção, aparece uma vez.
-4. **Se o `id` do `index.html` não bater com o do `main.tsx`, a tela fica branca.** O console mostra `Target container is not a DOM element`, porque o `getElementById` devolveu `null` e o `!` só escondeu essa possibilidade do TypeScript.
+4. **Depois de alterar o `tailwind.config.ts` com o `npm run dev` ligado, as classes podem parar de ser geradas.** O servidor continua entregando o Preflight, mas nenhuma classe utilitária, porque segue usando a configuração que leu ao ligar. Se o `tailwind.config.ts` mudou e a estilização sumiu, desligue o servidor com `Ctrl+C` e rode `npm run dev` de novo.
+5. **Se o `id` do `index.html` não bater com o do `main.tsx`, a tela fica branca.** O console mostra `Target container is not a DOM element`, porque o `getElementById` devolveu `null` e o `!` só escondeu essa possibilidade do TypeScript.
 
 ## Parte 6: perguntas de checagem
 

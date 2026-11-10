@@ -67,7 +67,9 @@ Cada etapa tem um commit no repositório da demo (`learning-frontend/workshop-de
 | # | Tempo | O que construir | Conceitos |
 |---|---|---|---|
 | 1 | 5 min | Mostrar as pastas e seguir `index.html`, `main.tsx`, `App.tsx` e `ProjectsPage` | Ordem de montagem, papel de cada pasta |
-| 2 | 12 min | Página estática só com divs e Tailwind, com cards repetidos na mão | Div, box model, flexbox, Tailwind |
+| 2a | 2 min | Página estática só com tags, sem nenhum CSS, com cards repetidos na mão | Tags com significado, estilo padrão do navegador |
+| 2b | 5 min | A mesma página com CSS puro (classes num arquivo `.css`) | Reset, box model, flexbox, CSS importado e global |
+| 2c | 5 min | A mesma página traduzida para Tailwind | Classes utilitárias, escala, token de cor |
 | 3 | 10 min | Extrair `ProjectCard` e `ProjectList`, criar o tipo `Project`, usar `.map`, adicionar hover e o ícone de lixeira | Anatomia de um `.tsx`, props, tipo, key, descrição opcional |
 | 4 | 12 min | `projectsApi.ts` e `useProjects` com carregando, erro e vazio, com a aba Network aberta | `useState`, `useEffect`, hook customizado, service, GET |
 | 5 | 13 min | `Modal` genérico e `NewProjectForm`, com POST e recarga da lista | `children`, renderização condicional, input controlado, `useRef` (foco), `useEffect` com cleanup (Esc), POST |
