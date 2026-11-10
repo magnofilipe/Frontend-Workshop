@@ -88,7 +88,7 @@ Perguntar: por que não posso mudar uma variável comum e esperar a tela atualiz
 | JSON no corpo e header `Content-Type` | POST |
 | `response.ok` e tratamento de erro | `projectsApi.ts`, estado de erro |
 | Camada de service | Separar "como chamar a API" de "como mostrar" |
-| Variável de ambiente (`import.meta.env.VITE_API_URL`) | `shared/api/client.ts` |
+| Variável de ambiente (`import.meta.env.VITE_API_URL`) | `frontend/.env`, lida em `projectsApi.ts` |
 | CORS | Por que o navegador bloqueia chamadas sem liberação do backend |
 | Aba Network do F12 | Ver requisição, status e resposta |
 

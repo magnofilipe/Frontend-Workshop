@@ -56,9 +56,10 @@ src/
 │   └── types/project.ts
 └── shared/
     ├── components/Modal.tsx
-    ├── components/Button.tsx
-    └── api/client.ts
+    └── components/Button.tsx
 ```
+
+O endereço do backend fica em `frontend/.env` (`VITE_API_URL`) e é lido em `projectsApi.ts`. Com uma feature só, um `shared/api/client.ts` seria um arquivo a mais sem uso; ele passa a fazer sentido quando outra feature também chamar o backend.
 
 ### Etapas
 Cada etapa tem um commit no repositório da demo (`learning-frontend/workshop-demo`).
