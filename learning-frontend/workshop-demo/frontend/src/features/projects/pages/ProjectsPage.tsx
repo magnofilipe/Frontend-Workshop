@@ -5,7 +5,7 @@ export function ProjectsPage() {
         <h1 className="text-2xl font-semibold">Projetos</h1>
         <button
           type="button"
-          className="rounded-lg bg-[#FF856B] px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90"
         >
           Novo projeto
         </button>
