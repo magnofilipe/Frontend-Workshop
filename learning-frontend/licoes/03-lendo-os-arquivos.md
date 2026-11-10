@@ -6,8 +6,6 @@ TypeScript é JavaScript com anotações de tipo. Todo código JavaScript válid
 
 Nos três arquivos que a demo tem até agora (`main.tsx`, `App.tsx` e `ProjectsPage.tsx`), a única coisa exclusiva do TypeScript é o `!` do `main.tsx`. Todo o resto é JavaScript, e a parte que parece HTML é JSX. Então o que falta aprender agora é JavaScript. Os tipos entram na próxima lição, quando o card passar a receber dados.
 
-As comparações abaixo usam Python, porque é a linguagem do backend.
-
 ## Funções
 
 ```js
@@ -18,26 +16,17 @@ function soma(a, b) {
 const resultado = soma(2, 3)
 ```
 
-Em Python, seria:
-
-```python
-def soma(a, b):
-    return a + b
-
-resultado = soma(2, 3)
-```
-
 Peça por peça:
 
-- **`function`** é a palavra que declara uma função, como o `def`.
+- **`function`** é a palavra que declara uma função.
 - **`soma`** é o nome dela.
 - **`(a, b)`** são os parâmetros, ou seja, os valores que quem chamar a função vai entregar.
-- **`{ }`** delimita o corpo. Em JavaScript são as chaves que marcam onde a função começa e termina, e não a indentação, como em Python.
+- **`{ }`** marca onde o corpo da função começa e termina.
 - **`return`** devolve um valor para quem chamou e encerra a função.
 
-Declarar e executar são coisas diferentes. A declaração só guarda a receita com um nome, e nada roda nesse momento. A execução acontece quando alguém escreve o nome seguido de parênteses, como `soma(2, 3)`, e é aí que o corpo roda e o `return` entrega `5`.
+Declarar e executar são coisas diferentes. A declaração só guarda a receita com um nome, e nada acontece nesse momento. A execução acontece quando alguém escreve o nome seguido de parênteses, como `soma(2, 3)`: aí o corpo é executado e o `return` entrega `5`, que fica guardado em `resultado`.
 
-O `const` cria uma variável que não pode receber outro valor depois, e o `let` cria uma que pode. Python não faz essa distinção.
+O `const` cria uma variável que não pode receber outro valor depois, e o `let` cria uma que pode.
 
 ## Um componente é uma função que devolve JSX
 
@@ -53,7 +42,7 @@ export function ProjectsPage() {
 
 **`function ProjectsPage()`** declara uma função chamada `ProjectsPage`, sem parâmetros. É exatamente o mesmo tipo de função do `soma`. A diferença está no que ela devolve.
 
-**`return ( ... )`** devolve o JSX. Os parênteses só agrupam as várias linhas, e eles são necessários por uma regra do JavaScript: se a linha do `return` terminar logo depois da palavra, o JavaScript considera a instrução encerrada ali e a função devolve `undefined` (o "nada" do JavaScript, equivalente ao `None`). Com o parêntese aberto na mesma linha do `return`, o JavaScript sabe que a expressão continua.
+**`return ( ... )`** devolve o JSX. Os parênteses só agrupam as várias linhas, e eles são necessários por uma regra do JavaScript: se a linha do `return` terminar logo depois da palavra, o JavaScript considera a instrução encerrada ali e a função devolve `undefined`, que é o "nada" do JavaScript. Com o parêntese aberto na mesma linha do `return`, o JavaScript sabe que a expressão continua.
 
 **O JSX não é texto HTML.** O SWC transforma cada tag numa chamada de função antes de o código chegar ao navegador:
 
@@ -73,13 +62,13 @@ Essa chamada devolve um objeto comum de JavaScript que descreve o que deve apare
 { type: 'h1', props: { className: 'projects-title', children: 'Projetos' } }
 ```
 
-Em Python, um objeto desses seria um dicionário. Então `ProjectsPage` é uma função que devolve uma descrição da tela, e não a tela em si. Quem lê essa descrição e cria os elementos de verdade é o React.
+Então `ProjectsPage` é uma função que devolve uma descrição da tela, e não a tela em si. Quem lê essa descrição e cria os elementos de verdade é o React.
 
 **O JSX precisa ter um único elemento externo.** Uma função devolve um valor só, e cada tag vira um objeto, então duas tags lado a lado no `return` seriam dois valores. Para devolver dois elementos irmãos, envolva-os em `<>` e `</>`, o Fragment, que agrupa sem criar nenhum elemento na página.
 
 ## `export` e `import`
 
-Cada arquivo é um módulo isolado: o que é declarado dentro dele fica invisível para os outros arquivos. Python faz o contrário, já que todo nome de um módulo pode ser importado. Em JavaScript, só é visível o que for marcado com `export`.
+Cada arquivo é um módulo isolado: o que é declarado dentro dele fica invisível para os outros arquivos. Só é visível o que for marcado com `export`.
 
 ```tsx
 export function ProjectsPage() { ... }
@@ -91,7 +80,7 @@ O `export` torna a função disponível para outros arquivos. Sem ele, o `App.ts
 import { ProjectsPage } from '../features/projects/pages/ProjectsPage'
 ```
 
-Esse import traz a função para dentro do `App.tsx`. Em Python, seria `from features.projects.pages.ProjectsPage import ProjectsPage`. O caminho é relativo ao arquivo que importa: `App.tsx` está em `src/app/`, o `..` sobe para `src/` e, de lá, o caminho desce até o arquivo. A extensão `.tsx` pode ser omitida, porque o Vite a encontra sozinho.
+Esse import traz a função para dentro do `App.tsx`. O caminho é relativo ao arquivo que importa: `App.tsx` está em `src/app/`, o `..` sobe para `src/` e, de lá, o caminho desce até o arquivo. A extensão `.tsx` pode ser omitida, porque o Vite a encontra sozinho.
 
 Há três formas de import nos arquivos da demo:
 
@@ -175,8 +164,7 @@ createRoot(document.getElementById('root')!).render(
 
 **`!`** é a única coisa de TypeScript no arquivo. O TypeScript sabe que o resultado pode ser `null`, e o `!` diz a ele: "garanto que não é". Nada é verificado de fato, então, se a garantia for falsa, o erro aparece quando a página roda.
 
-**`createRoot(elemento).render(...)`** são duas chamadas encadeadas. `createRoot` recebe a div e devolve um objeto que controla essa área da página, e `.render(...)` chama um método desse objeto. Em Python, a forma seria a mesma: `create_root(el).render(x)`.
-
+**`createRoot(elemento).render(...)`** são duas chamadas encadeadas. `createRoot` recebe a div e devolve um objeto que controla essa área da página, e `.render(...)` chama um método desse objeto.
 **`<StrictMode><App /></StrictMode>`** coloca o `App` dentro do `StrictMode`. O `StrictMode` desenha o que estiver dentro dele e, em desenvolvimento, chama cada componente duas vezes para revelar componentes que alteram algo fora de si. Esse "o que estiver dentro" se chama `children`, e você vai usar o mesmo mecanismo no `Modal` da etapa 5.
 
 **A vírgula depois de `</StrictMode>`** é permitida em JavaScript no último argumento e serve só à formatação.

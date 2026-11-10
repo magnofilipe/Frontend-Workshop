@@ -64,7 +64,7 @@ Perguntar: diferença entre JavaScript e TypeScript; o que acontece se o TypeScr
 | `children` | O que vai entre a abertura e o fechamento do componente | `Modal` |
 | Composição | Componentes dentro de componentes | Página |
 | Renderização condicional | `&&` e ternário no JSX | Modal aberto, descrição, estados da lista |
-| Listas e `key` | `.map` gera elementos; `key` identifica cada um | `ProjectList` |
+| Listas e `key` | `.map` gera elementos; `key` identifica cada um | `ProjectsPage` |
 | Eventos | `onClick`, `onChange`, `onSubmit` | Botões, formulário |
 | `useState` | Valor que, ao mudar, redesenha a tela | Modal aberto, campos, projeto a apagar |
 | Input controlado | Valor do input vem do estado | `NewProjectForm` |

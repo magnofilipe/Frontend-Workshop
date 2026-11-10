@@ -49,7 +49,6 @@ src/
 ├── features/projects/
 │   ├── pages/ProjectsPage.tsx
 │   ├── components/ProjectCard.tsx
-│   ├── components/ProjectList.tsx
 │   ├── components/NewProjectForm.tsx
 │   ├── components/DeleteProjectConfirm.tsx
 │   ├── hooks/useProjects.ts
@@ -71,7 +70,7 @@ Cada etapa tem um commit no repositório da demo (`learning-frontend/workshop-de
 | 2b | 5 min | A mesma página com CSS puro (classes num arquivo `.css`) | Reset, box model, flexbox, CSS importado e global |
 | 2c | 4 min | A mesma página traduzida para Tailwind, com a cor do botão em `bg-[#FF856B]` | Classes utilitárias, escala, valor arbitrário |
 | 2d | 1 min | A cor do botão vira o token `primary` no `tailwind.config.ts` | Token de cor |
-| 3 | 10 min | Extrair `ProjectCard` e `ProjectList`, criar o tipo `Project`, usar `.map`, adicionar hover e o ícone de lixeira | Anatomia de um `.tsx`, props, tipo, key, descrição opcional |
+| 3 | 10 min | Extrair `ProjectCard`, criar o tipo `Project`, usar `.map` na página, adicionar hover e o ícone de lixeira (um `ProjectList` separado fica como evolução possível, só mencionada) | Anatomia de um `.tsx`, props, tipo, key, descrição opcional |
 | 4 | 12 min | `projectsApi.ts` e `useProjects` com carregando, erro e vazio, com a aba Network aberta | `useState`, `useEffect`, hook customizado, service, GET |
 | 5 | 13 min | `Modal` genérico e `NewProjectForm`, com POST e recarga da lista | `children`, renderização condicional, input controlado, `useRef` (foco), `useEffect` com cleanup (Esc), POST |
 | 6 | 8 min | `DeleteProjectConfirm` reutilizando o `Modal`, com DELETE e recarga | Reuso de componente, evento subindo por props (`onDelete`), DELETE |
