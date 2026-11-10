@@ -45,7 +45,7 @@ O tipo padrão de um `button` é `submit`, e um `submit` dentro de um `<form>` e
 ## Etapa 2b: CSS puro
 
 O que muda em relação à 2a:
-- **`src/index.css` volta**, agora com o reset, as variáveis de cor e o estilo do `body`, e o `main.tsx` volta a importá-lo.
+- **`src/index.css` volta**, agora com o reset e o estilo do `body`, e o `main.tsx` volta a importá-lo. Ele fica separado do `ProjectsPage.css` porque vale para a aplicação inteira: se houvesse uma segunda página, ela também precisaria do reset, e não faria sentido depender do arquivo de outra página.
 - **`src/features/projects/pages/ProjectsPage.css` é criado**, com as classes da página.
 - **`ProjectsPage.tsx`** ganha `import './ProjectsPage.css'` e um `className` em cada tag.
 
@@ -80,16 +80,21 @@ Os cards não têm margem. O `gap: 16px` do `.project-list` afasta um card do ou
 
 Quando o card virar um componente, na etapa 3, cada lugar que o usar vai decidir o próprio espaçamento, em vez de herdar uma margem embutida no card. Margem dentro de componente é um padrão comum em código gerado por IA, e vale apontar na revisão.
 
-### Variáveis CSS
+### Largura e altura
 
-As cores ficam em `:root`, como `--color-primary`, igual ao `style.css` da Rocketseat. Na etapa 2c, a variável vira um token do Tailwind, com a mesma ideia: a cor é definida num lugar só e usada por nome.
+Os itens não têm `width` nem `height`, e o tamanho vem do conteúdo somado ao `padding`. O botão tem a largura do texto mais 16px de cada lado. Um tamanho fixo quebra quando o conteúdo muda, por exemplo com um texto maior, uma tradução ou o zoom do navegador, e aí o texto vaza ou é cortado.
+
+Há exceções:
+- **Containers da página** usam `max-width`, como os 768px do `.projects-page`, para limitar a largura sem fixá-la.
+- **Ícones, imagens e botões só com ícone** costumam ter tamanho fixo, porque não têm texto que varie.
+- **Campos de formulário** costumam usar `width: 100%` para ocupar a largura do pai.
 
 ## Etapa 2c: Tailwind
 
 O que muda em relação à 2b:
 - **`ProjectsPage.css` é apagado**, e o import dele sai do `ProjectsPage.tsx`.
-- **`index.css` passa a ter só as três diretivas do Tailwind.** O Preflight (`@tailwind base`) faz o papel do reset, e as variáveis saem.
-- **`tailwind.config.ts` ganha o token `primary: '#FF856B'`**, no lugar da variável `--color-primary`.
+- **`index.css` passa a ter só as três diretivas do Tailwind.** O Preflight (`@tailwind base`) faz o papel do reset.
+- **`tailwind.config.ts` ganha o token `primary: '#FF856B'`**, um nome para a cor do botão.
 - **Cada `className` troca o nome inventado** pelas classes utilitárias equivalentes.
 
 ### Tradução regra por regra
@@ -107,7 +112,7 @@ O que muda em relação à 2b:
 | `font-weight: 600` | `font-semibold` |
 | `padding: 8px 16px` | `px-4 py-2` |
 | `border-radius: 8px` | `rounded-lg` |
-| `background-color: var(--color-primary)` | `bg-primary` |
+| `background-color: #ff856b` | `bg-primary` |
 | `color: #fff` | `text-white` |
 | `font-size: 14px; line-height: 20px` | `text-sm` |
 | `font-weight: 500` | `font-medium` |
@@ -140,7 +145,7 @@ feat: build unstyled projects page with semantic tags only so the team sees brow
 ```
 
 ```
-feat: add plain CSS classes and variables to the projects page to show classic styling before Tailwind
+feat: add plain CSS classes to the projects page with a global reset to show classic styling before Tailwind
 ```
 
 ```

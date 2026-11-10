@@ -17,7 +17,7 @@ A demo do workshop é construída aqui, etapa por etapa. Configuração e ajuste
 |---|---|---|---|
 | 00 | Preparação | venv, pip, FastAPI, uvicorn, pytest | Concluída |
 | 01 | 1 | Vite, npm, `index.html`, `main.tsx`, `App.tsx`, ordem de montagem, pastas | Concluída |
-| 02 | 2a, 2b e 2c | Estilo padrão do navegador, tags com significado, CSS importado e global, tradução para Tailwind, token de cor | 2a pronta para commit |
+| 02 | 2a, 2b e 2c | Estilo padrão do navegador, tags com significado, CSS importado e global, tradução para Tailwind, token de cor | 2b pronta para commit |
 | 03 | Antes da 3 | Funções, JSX como chamada de função, `export` e `import`, por que o `App` desenha a página, roteador, `main.tsx` | Para ler |
 | 04 | 3 | Valores e referências, desestruturação, tipos, props, `.map`, `key` | A fazer |
 | 05 | 4 | Promise, `async` e `await`, `fetch`, `useState`, `useEffect`, StrictMode, hook customizado, aba Network | A fazer |
