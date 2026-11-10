@@ -1,11 +1,4 @@
-/* Zera margens e espaçamentos que cada navegador aplica por padrão. */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-}
+/* "base" inclui o Preflight, o reset do Tailwind que zera os estilos padrão do navegador. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

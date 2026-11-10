@@ -1,9 +1,10 @@
 # Lição 02: da página sem estilo ao Tailwind
 
-A etapa tem três commits com o mesmo conteúdo:
+A etapa tem quatro commits com o mesmo conteúdo:
 - **2a:** só HTML, sem nenhum CSS e sem `className`;
 - **2b:** classes num arquivo `.css`, como no projeto da Rocketseat;
-- **2c:** as mesmas regras traduzidas para Tailwind.
+- **2c:** as mesmas regras traduzidas para Tailwind, com a cor do botão como valor arbitrário;
+- **2d:** a cor do botão vira um token no `tailwind.config.ts`.
 
 ## Etapa 2a: sem estilo
 
@@ -94,8 +95,7 @@ Há exceções:
 O que muda em relação à 2b:
 - **`ProjectsPage.css` é apagado**, e o import dele sai do `ProjectsPage.tsx`.
 - **`index.css` passa a ter só as três diretivas do Tailwind.** O Preflight (`@tailwind base`) faz o papel do reset.
-- **`tailwind.config.ts` ganha o token `primary: '#FF856B'`**, um nome para a cor do botão.
-- **Cada `className` troca o nome inventado** pelas classes utilitárias equivalentes.
+- **Cada `className` troca o nome inventado** pelas classes utilitárias equivalentes. A cor do botão, que não existe na paleta do Tailwind, entra como valor arbitrário: `bg-[#FF856B]`.
 
 ### Tradução regra por regra
 
@@ -112,7 +112,7 @@ O que muda em relação à 2b:
 | `font-weight: 600` | `font-semibold` |
 | `padding: 8px 16px` | `px-4 py-2` |
 | `border-radius: 8px` | `rounded-lg` |
-| `background-color: #ff856b` | `bg-primary` |
+| `background-color: #ff856b` | `bg-[#FF856B]` |
 | `color: #fff` | `text-white` |
 | `font-size: 14px; line-height: 20px` | `text-sm` |
 | `font-weight: 500` | `font-medium` |
@@ -130,13 +130,23 @@ O que muda em relação à 2b:
 - `list-style: none` na lista;
 - `border: none`, `cursor: pointer` e `font-family: inherit` no botão.
 
-### Token de cor
+## Etapa 2d: token de cor
 
-`colors: { primary: '#FF856B' }` no `tailwind.config.ts` faz o Tailwind gerar `bg-primary`, `text-primary`, `border-primary` e as demais variantes. A alternativa seria escrever `bg-[#FF856B]` (um valor arbitrário) em cada lugar, o que traz dois problemas:
+O que muda em relação à 2c:
+- **`tailwind.config.ts` ganha `colors: { primary: '#FF856B' }`**, e o Tailwind passa a gerar `bg-primary`, `text-primary`, `border-primary` e as demais variantes.
+- **O botão troca `bg-[#FF856B]` por `bg-primary`.**
+
+Numa página só, o valor arbitrário não incomoda. Com a cor repetida em vários componentes, ele traz dois problemas:
 1. Trocar a cor exigiria procurar e substituir em todos os arquivos.
 2. Um erro de digitação, como `#FF856C`, criaria uma cor quase igual que ninguém percebe na revisão.
 
+Com o token, a cor fica num lugar só e é usada por nome.
+
 Depois de alterar o `tailwind.config.ts`, reinicie o `npm run dev`, pelo motivo explicado na lição 01.
+
+## Contornar elementos para depurar
+
+Para ver os limites de um elemento: `outline outline-2 outline-red-500`
 
 ## Commits
 
@@ -149,5 +159,13 @@ feat: add plain CSS classes to the projects page with a global reset to show cla
 ```
 
 ```
-refactor: translate projects page styles from plain CSS to Tailwind utilities and a primary color token to show modern styling
+refactor: translate projects page styles from plain CSS to Tailwind utilities with the brand color as an arbitrary value
+```
+
+```
+refactor: move the brand color into a primary Tailwind token so every component uses the same named color instead of copying the hex value
+```
+
+```
+docs: comment Tailwind classes in the projects page with pixel equivalents so readers unfamiliar with the scale understand them
 ```
