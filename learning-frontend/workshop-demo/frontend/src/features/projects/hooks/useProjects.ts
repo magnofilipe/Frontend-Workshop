@@ -6,11 +6,13 @@ export function useProjects() {
   const [projects, setProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [reloadCount, setReloadCount] = useState(0)
 
   useEffect(() => {
     async function load() {
       try {
         setProjects(await listProjects())
+        setError(null)
       } catch {
         setError('Não foi possível carregar os projetos.')
       } finally {
@@ -19,7 +21,11 @@ export function useProjects() {
     }
 
     load()
-  }, [])
+  }, [reloadCount])
 
-  return { projects, isLoading, error }
+  function reload() {
+    setReloadCount((count) => count + 1)
+  }
+
+  return { projects, isLoading, error, reload }
 }

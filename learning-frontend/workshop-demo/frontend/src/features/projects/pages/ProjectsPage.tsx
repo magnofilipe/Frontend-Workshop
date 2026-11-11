@@ -5,8 +5,13 @@ import { ProjectCard } from '../components/ProjectCard'
 import { useProjects } from '../hooks/useProjects'
 
 export function ProjectsPage() {
-  const { projects, isLoading, error } = useProjects()
+  const { projects, isLoading, error, reload } = useProjects()
   const [isCreating, setIsCreating] = useState(false)
+
+  function handleCreated() {
+    setIsCreating(false)
+    reload()
+  }
 
   function renderContent() {
     if (isLoading) {
@@ -47,7 +52,7 @@ export function ProjectsPage() {
 
       {isCreating && (
         <Modal title="Novo projeto" onClose={() => setIsCreating(false)}>
-          <NewProjectForm onCancel={() => setIsCreating(false)} />
+          <NewProjectForm onCreated={handleCreated} onCancel={() => setIsCreating(false)} />
         </Modal>
       )}
     </main>

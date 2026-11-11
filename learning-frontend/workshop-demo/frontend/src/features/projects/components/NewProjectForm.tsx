@@ -1,23 +1,37 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
+import { createProject } from '../services/projectsApi'
 
 type NewProjectFormProps = {
+  onCreated: () => void
   onCancel: () => void
 }
 
-export function NewProjectForm({ onCancel }: NewProjectFormProps) {
+export function NewProjectForm({ onCreated, onCancel }: NewProjectFormProps) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [isSaving, setIsSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const titleInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     titleInputRef.current?.focus()
   }, [])
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    setIsSaving(true)
+    setError(null)
+
+    try {
+      await createProject({ title: title.trim(), description: description.trim() || null })
+      onCreated()
+    } catch {
+      setError('Não foi possível criar o projeto.')
+      setIsSaving(false)
+    }
   }
 
-  const canSubmit = title.trim() !== ''
+  const canSubmit = title.trim() !== '' && !isSaving
 
   return (
     <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
@@ -40,6 +54,8 @@ export function NewProjectForm({ onCancel }: NewProjectFormProps) {
           className="rounded-lg border border-neutral-300 px-3 py-2 font-normal focus:border-primary focus:outline-none"
         />
       </label>
+
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
       <div className="flex justify-end gap-2">
         <button

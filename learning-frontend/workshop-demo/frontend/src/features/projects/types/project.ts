@@ -3,3 +3,8 @@ export type Project = {
   title: string
   description: string | null
 }
+
+export type NewProject = {
+  title: string
+  description: string | null
+}
