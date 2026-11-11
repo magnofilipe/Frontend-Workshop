@@ -20,7 +20,7 @@ A demo do workshop é construída aqui, etapa por etapa. Configuração e ajuste
 | 02 | 2a a 2d | Estilo padrão do navegador, tags com significado, CSS importado e global, tradução para Tailwind, token de cor | Concluída |
 | 03 | Antes da 3 | Funções, JSX como chamada de função, `export` e `import`, por que o `App` desenha a página, roteador, `main.tsx` | Concluída |
 | 04 | 3 | Objetos, `type`, props, desestruturação, `&&`, `.map`, arrow function, `key`, template string, lucide-react | Concluída |
-| 05 | 4 | Promise, `async` e `await`, `fetch`, `response.ok`, `.env`, `useState`, `useEffect`, StrictMode, hook customizado, estados da lista, aba Network, CORS | Pronta para commit |
-| 06 | 5 | `children`, renderização condicional, input controlado, `useRef`, `autoFocus`, cleanup, POST | A fazer |
+| 05 | 4 | Promise, `async` e `await`, `fetch`, `response.ok`, `.env`, `useState`, `useEffect`, StrictMode, hook customizado, estados da lista, aba Network, CORS | Concluída |
+| 06 | 5a e 5b | Estado para abrir modal, `onClick`, `children`, funções como props, clique fora, input controlado, `preventDefault`, `useRef`, `autoFocus`, POST, `reload`, array de dependências | 5a pronta para commit |
 | 07 | 6 | Reuso de componente, callbacks por props, DELETE | A fazer |
 | 08 | 7 | Radix Dialog, React Query | A fazer |

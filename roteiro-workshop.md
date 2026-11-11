@@ -30,7 +30,7 @@ Uma única página de projetos.
   - Botão "Criar" fica desabilitado enquanto o título estiver vazio.
   - Ao abrir, o foco vai para o campo de título.
 - Cada card tem um ícone de lixeira que abre um modal de confirmação, no mesmo estilo do modal de criação.
-- O modal fecha com Esc, com botão de cancelar e clicando fora.
+- O modal fecha com botão de cancelar e clicando fora. Esc fica de fora; é citado como uma das coisas que o Dialog do Radix faz pronto.
 - Após criar ou apagar, a lista é buscada de novo no backend.
 - Estados da lista: carregando, erro e vazia.
 - Card tem hover e não é clicável. Botões têm animação de clique.
@@ -55,8 +55,7 @@ src/
 │   ├── services/projectsApi.ts
 │   └── types/project.ts
 └── shared/
-    ├── components/Modal.tsx
-    └── components/Button.tsx
+    └── components/Modal.tsx
 ```
 
 O endereço do backend fica em `frontend/.env` (`VITE_API_URL`) e é lido em `projectsApi.ts`. Com uma feature só, um `shared/api/client.ts` seria um arquivo a mais sem uso; ele passa a fazer sentido quando outra feature também chamar o backend.
@@ -73,7 +72,8 @@ Cada etapa tem um commit no repositório da demo (`learning-frontend/workshop-de
 | 2d | 1 min | A cor do botão vira o token `primary` no `tailwind.config.ts` | Token de cor |
 | 3 | 10 min | Extrair `ProjectCard`, criar o tipo `Project`, usar `.map` na página, adicionar hover e o ícone de lixeira (um `ProjectList` separado fica como evolução possível, só mencionada) | Anatomia de um `.tsx`, props, tipo, key, descrição opcional |
 | 4 | 12 min | `projectsApi.ts` e `useProjects` com carregando, erro e vazio, com a aba Network aberta | `useState`, `useEffect`, hook customizado, service, GET |
-| 5 | 13 min | `Modal` genérico e `NewProjectForm`, com POST e recarga da lista | `children`, renderização condicional, input controlado, `useRef` (foco), `useEffect` com cleanup (Esc), POST |
+| 5a | 7 min | `Modal` genérico com o `NewProjectForm` (campos, "Criar" desabilitado com título vazio, foco no título), fechando com "Cancelar" e clique fora | Estado, `&&`, `onClick`, `children`, função como prop, objeto `event`, input controlado, `preventDefault`, `useRef` |
+| 5b | 6 min | POST pelo formulário, com estado de envio, erro e recarga da lista | `createProject`, `isSaving`, operador "ou" (`\|\|`), array de dependências (`reloadCount`) |
 | 6 | 8 min | `DeleteProjectConfirm` reutilizando o `Modal`, com DELETE e recarga | Reuso de componente, evento subindo por props (`onDelete`), DELETE |
 | 7 | 5 min | Opcional: trocar o miolo do `useProjects` por `useQuery` | Hook isola a lógica; por que o dash usa React Query |
 

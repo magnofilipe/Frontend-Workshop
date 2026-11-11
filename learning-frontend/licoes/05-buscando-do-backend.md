@@ -23,7 +23,7 @@ Quem controla quando o componente é chamado, e quem guarda dados fora dele, é 
 | Hook | O que o React faz pelo componente | Onde aparece |
 |---|---|---|
 | `useState` | Guarda um valor para o componente entre uma renderização e outra, e devolve uma função que troca esse valor e faz o React renderizar o componente de novo | Esta etapa |
-| `useEffect` | Executa uma função depois que o resultado do componente está na tela, e de novo apenas quando valores indicados mudarem. Quando o componente sai da tela, executa a função de limpeza | Esta etapa e a 5 |
+| `useEffect` | Executa uma função depois que o resultado do componente está na tela, e de novo apenas quando valores indicados mudarem. Quando o componente sai da tela, executa a função de limpeza | Esta etapa e o foco do formulário na etapa 5 |
 | `useRef` | Guarda um valor entre renderizações sem renderizar de novo quando ele muda. É usado para apontar para um elemento real da página, como o campo de texto, e chamar `.focus()` nele | Etapa 5 |
 
 O React tem outros hooks, que a demo não usa.
@@ -168,6 +168,7 @@ O endereço do backend muda conforme o ambiente: na sua máquina é `localhost:8
 
 O Vite lê esse arquivo e disponibiliza em `import.meta.env` apenas as variáveis cujo nome começa com `VITE_`. Uma variável sem esse prefixo, como uma senha de banco de dados, nunca é incluída no código da página.
 
+- **O `.env` não vai para o git.** Ele está no `.gitignore`, e o que vai para o git é o `.env.example`, com as mesmas variáveis e valores de exemplo. Quem clona o projeto copia o `.env.example` para `.env` e ajusta os valores.
 - **Mudou o `.env`? Reinicie o `npm run dev`.** O Vite só lê o arquivo quando é iniciado.
 - **Nada no frontend é secreto.** O valor de uma variável `VITE_` vai para o navegador junto com o código, e qualquer pessoa pode lê-lo pelo F12. No dash, é por isso que o frontend usa a anon key do Supabase, e nunca a service role key.
 
@@ -304,7 +305,7 @@ Ele recebe dois argumentos:
 1. **Uma função**, que é o efeito. O React a executa depois que o componente aparece na tela.
 2. **Um array de dependências.** Depois de cada renderização, o React compara os valores desse array com os da renderização anterior, e só executa o efeito de novo se algum deles mudou. Com `[]`, não há nada para mudar, e o efeito é executado uma única vez, quando o componente aparece pela primeira vez.
 
-O nome "efeito" se refere a ações que alcançam algo fora do React, como enviar um pedido ao backend ou escutar o teclado (etapa 5).
+O nome "efeito" se refere a ações que alcançam algo fora do React, como enviar um pedido ao backend, escutar o teclado ou dar foco a um campo.
 
 ### O efeito do `useProjects`
 
@@ -324,7 +325,7 @@ useEffect(() => {
 }, [])
 ```
 
-**Por que existe a função `load`.** Ela usa `await`, então precisa ser `async`. Mas o efeito em si não pode ser `async`: uma função `async` sempre devolve uma Promise, e o React espera que a função do efeito devolva nada ou uma função de limpeza (etapa 5). Por isso, a função `async` é declarada dentro do efeito e chamada logo em seguida com `load()`.
+**Por que existe a função `load`.** Ela usa `await`, então precisa ser `async`. Mas o efeito em si não pode ser `async`: uma função `async` sempre devolve uma Promise, e o React espera que a função do efeito devolva nada ou uma função de limpeza (seção 7). Por isso, a função `async` é declarada dentro do efeito e chamada logo em seguida com `load()`.
 
 **`try`, `catch` e `finally`:**
 - **`try { ... }`** executa o bloco. Se `listProjects` for bem-sucedida, os projetos são guardados.
@@ -346,7 +347,7 @@ Na aba Network, aparecem **dois** pedidos para `projects`. A causa é o `StrictM
 2. desmonta o componente, como se ele tivesse saído da tela;
 3. monta de novo, e o efeito é executado outra vez, enviando o 2º GET.
 
-Isso serve para revelar efeitos que não se desfazem ao sair da tela. Um efeito que começa a escutar o teclado e não para ao sair passaria a escutar em dobro, e o problema apareceria imediatamente. A forma de desfazer um efeito é a função de limpeza, assunto da etapa 5.
+Isso serve para revelar efeitos que não se desfazem ao sair da tela. Um efeito que começa a escutar o teclado e não para ao sair passaria a escutar em dobro, e o problema apareceria imediatamente. A forma de desfazer um efeito é a função de limpeza: uma função devolvida pelo efeito com `return () => { ... }`, que o React chama quando o componente sai da tela e antes de executar o efeito de novo. No exemplo do teclado, ela seria `return () => document.removeEventListener('keydown', handleKeyDown)`. O efeito de busca da demo não precisa de limpeza.
 
 Aqui o GET duplicado não causa problema: os dois pedidos trazem os mesmos dados, e o segundo só grava a mesma lista. No `npm run build`, o `StrictMode` não faz isso, e o GET acontece uma vez.
 

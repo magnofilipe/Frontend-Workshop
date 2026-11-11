@@ -69,9 +69,9 @@ Perguntar: diferença entre JavaScript e TypeScript; o que acontece se o TypeScr
 | `useState` | Valor que, ao mudar, redesenha a tela | Modal aberto, campos, projeto a apagar |
 | Input controlado | Valor do input vem do estado | `NewProjectForm` |
 | Elevar estado | Estado fica no pai; filho avisa por callback | `onDelete` do card para a página |
-| `useEffect` | Código que roda após a tela aparecer, para falar com algo fora do React | Buscar a lista; ouvir a tecla Esc |
+| `useEffect` | Código que roda após a tela aparecer, para falar com algo fora do React | Buscar a lista; dar foco ao campo de título |
 | Array de dependências | Controla quando o efeito roda de novo | `useEffect` do `useProjects` |
-| Cleanup do efeito | Função que desfaz o efeito (remover listener) | Esc do modal |
+| Cleanup do efeito | Função que desfaz o efeito (remover listener) | Não aparece na demo; explicado junto do StrictMode |
 | `useRef` | Referência que não redesenha a tela; aponta para elemento do DOM | Foco no campo de título |
 | Hook customizado | Função `useAlgo` que agrupa hooks e lógica | `useProjects` |
 | Re-renderização | Quando e por que o React redesenha um componente | Toda interação |
@@ -98,7 +98,7 @@ Perguntar: por que `fetch` não lança erro em um 404; o que é CORS e por que s
 
 | Conceito | O que é |
 |---|---|
-| Fechar com Esc | Feito na demo com `useEffect` |
+| Fechar com Esc | Fora da demo; o Dialog do Radix faz pronto |
 | Foco preso | Tab não sai do modal enquanto ele está aberto |
 | Devolver foco | Ao fechar, o foco volta ao botão que abriu |
 | Travar rolagem | A página atrás não rola |
