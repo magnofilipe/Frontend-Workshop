@@ -25,3 +25,11 @@ export async function createProject(project: NewProject): Promise<Project> {
 
   return response.json()
 }
+
+export async function deleteProject(id: string): Promise<void> {
+  const response = await fetch(`${API_URL}/projects/${id}`, { method: 'DELETE' })
+
+  if (!response.ok && response.status !== 404) {
+    throw new Error(`Erro ${response.status} ao apagar projeto`)
+  }
+}

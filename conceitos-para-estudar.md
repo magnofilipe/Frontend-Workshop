@@ -107,7 +107,7 @@ Perguntar: por que `fetch` não lança erro em um 404; o que é CORS e por que s
 
 Perguntar: o que o `Dialog` do Radix faz que o modal da demo não faz.
 
-## 7. React Query (etapa opcional)
+## 7. React Query (fora da demo, para responder perguntas)
 
 | Conceito | O que é |
 |---|---|

@@ -1,15 +1,23 @@
 import { useState } from 'react'
 import { Modal } from '../../../shared/components/Modal'
+import { DeleteProjectConfirm } from '../components/DeleteProjectConfirm'
 import { NewProjectForm } from '../components/NewProjectForm'
 import { ProjectCard } from '../components/ProjectCard'
 import { useProjects } from '../hooks/useProjects'
+import { Project } from '../types/project'
 
 export function ProjectsPage() {
   const { projects, isLoading, error, reload } = useProjects()
   const [isCreating, setIsCreating] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
 
   function handleCreated() {
     setIsCreating(false)
+    reload()
+  }
+
+  function handleDeleted() {
+    setProjectToDelete(null)
     reload()
   }
 
@@ -29,7 +37,12 @@ export function ProjectsPage() {
     return (
       <ul className="flex flex-col gap-4">
         {projects.map((project) => (
-          <ProjectCard key={project.id} title={project.title} description={project.description} />
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            description={project.description}
+            onDelete={() => setProjectToDelete(project)}
+          />
         ))}
       </ul>
     )
@@ -53,6 +66,16 @@ export function ProjectsPage() {
       {isCreating && (
         <Modal title="Novo projeto" onClose={() => setIsCreating(false)}>
           <NewProjectForm onCreated={handleCreated} onCancel={() => setIsCreating(false)} />
+        </Modal>
+      )}
+
+      {projectToDelete && (
+        <Modal title="Apagar projeto" onClose={() => setProjectToDelete(null)}>
+          <DeleteProjectConfirm
+            project={projectToDelete}
+            onDeleted={handleDeleted}
+            onCancel={() => setProjectToDelete(null)}
+          />
         </Modal>
       )}
     </main>

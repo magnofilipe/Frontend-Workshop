@@ -3,9 +3,10 @@ import { Trash2 } from 'lucide-react'
 type ProjectCardProps = {
   title: string
   description: string | null
+  onDelete: () => void
 }
 
-export function ProjectCard({ title, description }: ProjectCardProps) {
+export function ProjectCard({ title, description, onDelete }: ProjectCardProps) {
   return (
     <li className="flex items-start justify-between gap-4 rounded-lg border border-neutral-300 bg-white p-4 transition-colors hover:bg-[#FFF8F5]">
       <div>
@@ -15,6 +16,7 @@ export function ProjectCard({ title, description }: ProjectCardProps) {
       <button
         type="button"
         aria-label={`Apagar ${title}`}
+        onClick={onDelete}
         className="text-neutral-500 transition hover:text-red-600 active:scale-95"
       >
         <Trash2 className="h-5 w-5" />

@@ -36,7 +36,7 @@ Uma única página de projetos.
 - Card tem hover e não é clicável. Botões têm animação de clique.
 
 ### Stack
-Vite, React 18, TypeScript, Tailwind 3 e lucide-react (ícones). Mesma base do dash. React Query só entra na etapa opcional.
+Vite, React 18, TypeScript, Tailwind 3 e lucide-react (ícones). Mesma base do dash. React Query fica fora da demo e só é citado na seção de perguntas, como o que o dash usa no lugar do `useProjects` com `useEffect`.
 
 ### Estrutura de pastas
 Versão reduzida da "Arquitetura do frontend.md" do dash, para que explicar a demo seja explicar o dash.
@@ -75,9 +75,7 @@ Cada etapa tem um commit no repositório da demo (`learning-frontend/workshop-de
 | 5a | 7 min | `Modal` genérico com o `NewProjectForm` (campos, "Criar" desabilitado com título vazio, foco no título), fechando com "Cancelar" e clique fora | Estado, `&&`, `onClick`, `children`, função como prop, objeto `event`, input controlado, `preventDefault`, `useRef` |
 | 5b | 6 min | POST pelo formulário, com estado de envio, erro e recarga da lista | `createProject`, `isSaving`, operador "ou" (`\|\|`), array de dependências (`reloadCount`) |
 | 6 | 8 min | `DeleteProjectConfirm` reutilizando o `Modal`, com DELETE e recarga | Reuso de componente, evento subindo por props (`onDelete`), DELETE |
-| 7 | 5 min | Opcional: trocar o miolo do `useProjects` por `useQuery` | Hook isola a lógica; por que o dash usa React Query |
 
-Se atrasar, corte a etapa 7.
 
 ## 5. Perguntas (15 min)
 Se der tempo, abrir o `ClientDashboard.tsx` do dash e reconhecer as peças vistas na demo.

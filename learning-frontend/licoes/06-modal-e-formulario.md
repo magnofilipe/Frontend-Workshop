@@ -310,7 +310,7 @@ Depois de cada renderização, o React compara cada valor do array com o valor q
 
 Durante a nova busca, `isLoading` não volta a `true`. A lista antiga continua na tela até a nova chegar, em vez de piscar "Carregando projetos...".
 
-Um contador que só existe para provocar uma nova busca é um recurso artificial. Ele funciona, mas a etapa 7 mostra o React Query, em que a lista é marcada como desatualizada e buscada de novo sem esse contador.
+Um contador que só existe para provocar uma nova busca é um recurso artificial. Ele funciona, mas bibliotecas como o React Query, que está instalado no dash, resolvem isso de outro jeito: depois da criação, a lista é marcada como desatualizada e buscada de novo, sem contador. O React Query fica fora da demo.
 
 ### O que acontece ao clicar em "Criar"
 
@@ -330,7 +330,7 @@ O `role="dialog"`, o `aria-modal="true"` e o `aria-label` avisam ao leitor de te
 - **Devolver o foco:** ao fechar, o foco deveria voltar ao botão "Novo projeto".
 - **Travar a rolagem:** a página por trás continua rolando.
 
-Implementar isso à mão é trabalhoso e fácil de errar. É por isso que o dash usa o `Dialog` do Radix (via shadcn, em `components/ui`), que já faz tudo isso. A etapa 7 trata disso.
+Implementar isso à mão é trabalhoso e fácil de errar. É por isso que o dash usa o `Dialog` do Radix (via shadcn, em `components/ui`), que já faz tudo isso.
 
 ## Commits
 
