@@ -22,4 +22,5 @@ A demo do workshop é construída aqui, etapa por etapa. Configuração e ajuste
 | 04 | 3 | Objetos, `type`, props, desestruturação, `&&`, `.map`, arrow function, `key`, template string, lucide-react | Concluída |
 | 05 | 4 | Promise, `async` e `await`, `fetch`, `response.ok`, `.env`, `useState`, `useEffect`, StrictMode, hook customizado, estados da lista, aba Network, CORS | Concluída |
 | 06 | 5a e 5b | Estado para abrir modal, `onClick`, `children`, funções como props, clique fora, input controlado, `preventDefault`, `useRef`, `autoFocus`, POST, `reload`, array de dependências | Concluída |
-| 07 | 6 | Estado com o projeto escolhido, evento subindo do card, reuso do `Modal`, DELETE, 204 sem corpo, 404 como sucesso, `key` na remoção | Pronta para commit |
+| 07 | 6 | Estado com o projeto escolhido, evento subindo do card, reuso do `Modal`, DELETE, 204 sem corpo, 404 como sucesso, `key` na remoção | Concluída |
+| 08 | 7 | Pasta `assets`, ícone da aba, nome com código no build, `assets` versus `public` | Pronta para commit |

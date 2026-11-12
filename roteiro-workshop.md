@@ -54,6 +54,7 @@ src/
 │   ├── hooks/useProjects.ts
 │   ├── services/projectsApi.ts
 │   └── types/project.ts
+├── assets/brand/avaliai-icon.svg
 └── shared/
     └── components/Modal.tsx
 ```
@@ -75,6 +76,7 @@ Cada etapa tem um commit no repositório da demo (`learning-frontend/workshop-de
 | 5a | 7 min | `Modal` genérico com o `NewProjectForm` (campos, "Criar" desabilitado com título vazio, foco no título), fechando com "Cancelar" e clique fora | Estado, `&&`, `onClick`, `children`, função como prop, objeto `event`, input controlado, `preventDefault`, `useRef` |
 | 5b | 6 min | POST pelo formulário, com estado de envio, erro e recarga da lista | `createProject`, `isSaving`, operador "ou" (`\|\|`), array de dependências (`reloadCount`) |
 | 6 | 8 min | `DeleteProjectConfirm` reutilizando o `Modal`, com DELETE e recarga | Reuso de componente, evento subindo por props (`onDelete`), DELETE |
+| 7 | 2 min | Ícone do avaliAI na aba, guardado em `src/assets/brand` | Pasta `assets`, `<link rel="icon">`, nome com código no build, `assets` versus `public` |
 
 
 ## 5. Perguntas (15 min)
